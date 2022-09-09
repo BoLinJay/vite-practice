@@ -12,6 +12,11 @@ const router = createRouter({
       path: '/componentsList',
       name: 'componentsList',
       component: () => import('../views/conponsitionList.vue')
+    },
+    {
+      path: '/star',
+      name: 'Star',
+      component: () => import('../views/FiveStarEvaluation.vue')
     }
   ]
 })

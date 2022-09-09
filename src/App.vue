@@ -16,6 +16,7 @@ import { RouterLink, RouterView } from "vue-router";
       <nav>
         <router-link to="/shuttlebox">穿梭框</router-link>
         <router-link to="/componentsList">conponsitionList</router-link>
+        <router-link to="/star">星星</router-link>
       </nav>
     </div>
   </header>
