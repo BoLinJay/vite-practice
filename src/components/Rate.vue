@@ -1,13 +1,13 @@
 <template>
-	<div 
+	<span 
 	v-for="(item,index) in starNum" 
 	class="icon" 
 	@mouseover="moveChange(index)"
 	@mouseleave="leaveChange"
-	:class="{move:isChangeNum >= index}"
+	:class="{active:isChangeStarNum >= index}"
 	@click="handleClick(index)"
 	 >
-	</div>
+	</span>
 	<span>{{evaluation}}</span>
 </template>
 <script setup>
@@ -25,41 +25,40 @@ const props = defineProps({
 		default: ['极差','失望','一般','满意','惊喜'],
 	}
 })
-const  isChangeNum=ref(-1);
-const  isMoveChange = ref(0)
+const  isChangeStarNum=ref(-1);
+const  isLeaveCondition = ref(0)
 // 鼠标移动
 const  moveChange = (index) => {
-	console.log(index);
-	isChangeNum.value = index
+	// 阻止条件
+	if(isLeaveCondition.value) return 
+	isChangeStarNum.value = index
 }
 // 鼠标移出
 const leaveChange = () => {
 	// 阻止条件
-	if(isMoveChange.value) {
-		return 
-	}
-	isChangeNum.value = -1
+	if(isLeaveCondition.value) return 
+	isChangeStarNum.value = -1
 }
 // 评价
 const evaluation = computed(()=> {
-	return props.evaluationList[isChangeNum.value]
+	return props.evaluationList[isChangeStarNum.value]
 })
 // 点击
 const handleClick = (index) => {
-	isChangeNum.value = index
-	// 点击后阻止鼠标移出事件
-	isMoveChange.value = 1
+	isChangeStarNum.value = index
+	// 点击后阻止鼠标移动事件
+	isLeaveCondition.value = 1
 }
 </script>
 
-<style>
+<style scoped>
 .icon {
-	background: url(@/assets/img/star.png) no-repeat;
-	height: 24px;
 	position: relative;
+	height: 24px;
+	width: 24px;
+	background: url(@/assets/img/star.png) no-repeat;
 }
-
-.icon.move {
+.active {
 	background-position: 0px -25px;
 }
 </style>

@@ -17,7 +17,7 @@ const addRandomA = () => {
 defineExpose({ addRandomA });
 </script>
 
-<style lang="css" scoped>
+<style scoped>
 .content {
   width: 300px;
   height: 30px;
